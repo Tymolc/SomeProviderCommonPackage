@@ -20,9 +20,8 @@ public class FileProviderItem: NSObject, NSFileProviderItem, NSSecureCoding {
     }
 
     public required init(coder decoder: NSCoder) {
-        //identifier = decoder.decodeObject(of: NSFileProviderItemIdentifier forKey: theKey) as? NSFileProviderItemIdentifier
-        identifier = decoder.decodeObject(forKey: "identifier") as? NSFileProviderItemIdentifier ?? NSFileProviderItemIdentifier("")
-        size = decoder.decodeObject(forKey: "size") as? NSNumber ?? 0
+        identifier = NSFileProviderItemIdentifier(decoder.decodeObject(of: NSString.self, forKey: "identifier") as String? ?? "")
+        size = decoder.decodeObject(of: NSNumber.self, forKey: "size") ?? NSNumber(0)
     }
 
     public func encode(with encoder: NSCoder) {
